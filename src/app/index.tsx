@@ -1,15 +1,18 @@
 import { router } from "expo-router";
 import { useState } from "react";
 import { StyleSheet, View, Text, TextInput, Button, Alert } from "react-native";
+import { useUsuarioStore } from "../store/usuario-store";
 
 export default function LoginScreen() {
     
     const [ email, setEmail ] = useState('');
     const [ senha, setSenha ] = useState('');
+    const { setUsuario } = useUsuarioStore();
     
     const handleLogin = async () => {
         if (email == 'teste@teste.com' && senha == '123456') {
             //Manda para outra tela sem botão de voltar
+            setUsuario(email)
             router.replace('home');
         } else
             Alert.alert('Erro', 'Login ou senha incorreta!')
